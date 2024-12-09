@@ -1,13 +1,22 @@
-export const poolState = () => {
-    const fs = require('fs');
+import path, {dirname, join} from 'path';
+import { fileURLToPath } from 'url';
+import chalk from 'chalk';
+import fs from 'fs';
 
-    function displayPoolStatus() {
-        const data = fs.readFileSync('database.json');
-        const pools = JSON.parse(data);
-    
-        console.log("\n--- Likidite Havuzu Durumu ---");
-        console.log(`Token A: ${pools.pool.tokenA}`);
-        console.log(`Token B: ${pools.pool.tokenB}`);
-        console.log(`K (Constant): ${pools.pool.K}\n`);
-    }    
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = dirname(_filename);
+const filePath = join(_dirname.split('javadex')[0], 'javadex', 'database.json');
+
+
+export const poolState =() => {
+    try {
+      const data = fs.readFileSync(filePath, 'utf-8');
+      console.log(JSON.parse(data).pool);
+
+    } catch (err) {
+      console.error(chalk.red('Dosya okunurken hata oluştu:', err));
+      process.exit(1); 
+
+    }
 }
+poolState();
