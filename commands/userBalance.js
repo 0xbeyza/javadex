@@ -7,7 +7,7 @@ const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);
 const filePath = join(_dirname.split('javadex')[0], 'javadex', 'database.json');
 
-export const userBalance =() => {
+export const userBalance = () => {
     try {
       const data = fs.readFileSync(filePath, 'utf-8');
       console.log(JSON.parse(data).user);

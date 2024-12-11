@@ -8,7 +8,7 @@ const _dirname = dirname(_filename);
 const filePath = join(_dirname.split('javadex')[0], 'javadex', 'database.json');
 
 
-export const poolState =() => {
+export const poolState = () => {
     try {
       const data = fs.readFileSync(filePath, 'utf-8');
       console.log(JSON.parse(data).pool);
